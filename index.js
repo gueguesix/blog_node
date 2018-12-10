@@ -14,6 +14,11 @@ app.set('view cache', process.env.NODE_ENV === 'production')
 
 const PORT = 9000
 const HOST = 'localhost'
+// const DB_USER = 'blog_user'
+// const DB_NAME = 'blog_user'
+// const DB_PASSWORD = '1234abcd'
+// const DB_HOST = 'ds137913.mlab.com'
+// const DB_PORT = 37913
 
 app.use(express.static(path.join(__dirname, 'public'))) // Vérifie les requêtes de ressources publiques (css, images, js, ...)
 app.use(bodyParser.urlencoded({extended: false}))
