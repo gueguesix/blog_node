@@ -1,0 +1,91 @@
+extends ../layout.pug
+
+mixin article_row(id, date, title, author, category)
+    tr
+        td= id
+        td= new Date(date).toLocaleString()
+        td
+            a(href='/article/'+ id)= title
+        td= author
+        td= category
+        td
+            a.action-info(href='/admin/edit/'+ id)
+                i.fa.fa-pencil
+                |  Modifier
+            | 
+            a.action-danger.delete-link(href='/admin/delete/'+ id)
+                i.fa.fa-trash
+                |  Supprimer
+
+mixin commentary(id, content, date, author)
+    tr
+        td= id
+        td= new Date(date).toLocaleString()
+
+        td= content
+        td= author
+        
+        td
+            a.action-danger.delete-link(href='/admin/delete/'+ id)
+                i.fa.fa-trash
+                |  Supprimer
+
+
+block variables
+    - let title = 'Administration';
+
+block content
+    main.container
+        .pull-right
+            a(href="/admin/write").btn
+                i.fa.fa-plus
+                |  Publier un nouvel article
+
+        h1 Bienvenue dans l'espace d'administration
+
+        p Cet espace vous permet de gérer et administrer les articles présents sur votre blog !
+
+        table
+            thead
+                tr
+                    th #
+                    th
+                        i.fa.fa-calendar
+                        |  Date de publication
+                    th Titre
+                    th
+                        i.fa.fa-user
+                        |  Auteur
+                    th
+                        i.fa.fa-tag
+                        |  Catégorie
+                    th
+                        i.fa.fa-cog
+                        |  Actions
+            tbody
+                each article in articles
+                    +article_row(article._id, article.dateCreated, article.title, article.author.name, article.category.title)
+        br
+        p Les Commentaires :
+        br
+                
+
+        table
+            thead
+                tr
+                    th #
+                    th
+                        i.fa.fa-calendar
+                        |  Date de publication
+                    th Contenu
+                    
+                    th
+                        i.fa.fa-user
+                        |  Auteur
+                    th
+                        i.fa.fa-cog
+                        |  Actions
+            tbody                
+                each commentary in commentaries
+                    +commentary(commentary._id, commentary.content, commentary.dateCreated, commentary.author.name)
+                

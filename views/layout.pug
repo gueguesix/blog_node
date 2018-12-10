@@ -1,0 +1,26 @@
+block variables
+
+<!DOCTYPE html>
+html(lang="fr")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title #{title} - Blog Node.js
+
+        link(rel="stylesheet", href="//unpkg.com/font-awesome@4.7.0/css/font-awesome.css")
+        link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Lato:400,400i,700,700i|Merriweather:400,400i,700,700i")
+        link(rel="stylesheet", href="/styles/app.css")
+    body
+
+        header
+            .container
+                nav.pull-right
+                    a.btn(href='/admin')
+                        i.fa.fa-cog
+                        |  Administration
+                h1
+                    a(href='/' title="Retour à la page d'accueil") 3615 MyBlog
+                p Node.js is cool!
+
+        block content

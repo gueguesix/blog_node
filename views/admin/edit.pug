@@ -1,0 +1,43 @@
+extends ../layout.pug
+
+block variables
+    - let title = `Modification de "${article.title}"`;
+
+block content
+    main.container
+        a(href="/admin")
+            i.fa.fa-arrow-left
+            |  Retour à la liste des articles
+
+        h1 Modifier l'article "#{article.title}"
+        form(method='post' action='/admin/edit/'+ article._id)
+            fieldset
+                legend Modification d'un article
+                .form-field
+                    label(for='titre') Titre :
+                    input#titre(type='text' name='titre' placeholder='Titre de votre article ...' value=article.title)
+                .form-field
+                    label(for='categorie') Categorie :
+                    select#categorie(name='categorie')
+                        each category in categories
+                            if category._id === article.category._id
+                                option(value=category._id selected)= category.title
+                            else
+                                option(value=category._id)= category.title
+                .form-field
+                    label(for='contenu') Contenu :
+                    textarea#contenu.textarea-big(name='contenu' placeholder='Lorem ipsum dolor sit amet ...')= article.content
+                .form-field
+                    label(for='auteur') Auteur :
+                    select#auteur(name='auteur')
+                        each author in authors
+                            if author._id === article.author._id
+                                option(value=author._id selected)= author.name
+                            else
+                                option(value=author._id)= author.name
+                .form-field.align-center
+                    button.btn(type='submit') Publier
+
+
+
+

@@ -1,0 +1,25 @@
+extends layout.pug
+
+block variables
+    - let title = 'Écrire un nouveau commentaire';
+
+block content
+    main.container
+        a(href="/")
+            i.fa.fa-arrow-left
+            |  Retour à la liste des articles
+
+        p Renseignez le formulaire suivant pour ajouter un nouveau commentaire :
+        form(method='post' action='/' + article._id + '/writeCommentary')
+            fieldset
+                legend Ajout d'un commentaire
+                .form-field
+                    label(for='contenu') Contenu :
+                    textarea#contenu.textarea-big(name='contenu' placeholder='Lorem ipsum dolor sit amet ...')
+                .form-field
+                    label(for='auteur') Auteur :
+                    select#auteur(name='auteur')
+                        each author in authors
+                            option(value=author._id)= author.name
+                .form-field.align-center
+                    button.btn(type='submit') Publier

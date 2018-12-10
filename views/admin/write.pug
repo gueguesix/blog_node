@@ -1,0 +1,37 @@
+extends ../layout.pug
+
+block variables
+    - let title = 'Écrire un nouvel article';
+
+block content
+    main.container
+        a(href="/admin")
+            i.fa.fa-arrow-left
+            |  Retour à la liste des articles
+
+        p Renseignez le formulaire suivant pour ajouter un nouvel article :
+        form(method='post' action='/admin/write')
+            fieldset
+                legend Ajout d'un article
+                .form-field
+                    label(for='titre') Titre :
+                    input#titre(type='text' name='titre' placeholder='Titre de votre article ...')
+                .form-field
+                    label(for='categorie') Categorie :
+                    select#categorie(name='categorie')
+                        each category in categories
+                            option(value=category._id)= category.title
+                .form-field
+                    label(for='contenu') Contenu :
+                    textarea#contenu.textarea-big(name='contenu' placeholder='Lorem ipsum dolor sit amet ...')
+                .form-field
+                    label(for='auteur') Auteur :
+                    select#auteur(name='auteur')
+                        each author in authors
+                            option(value=author._id)= author.name
+                .form-field.align-center
+                    button.btn(type='submit') Publier
+
+
+
+

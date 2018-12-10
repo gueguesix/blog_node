@@ -1,0 +1,45 @@
+extends layout.pug
+
+mixin commentary(id, content, date, auteur)
+    commentary
+        p= content
+        footer
+            i.fa.fa-calendar
+                |  Publi&eacute; #{new Date(date).toLocaleString()}, par 
+                em= auteur + ' '
+
+block variables
+    - let title = article.title;
+
+block content
+    main.container
+        a(href="/")
+            i.fa.fa-arrow-left
+            |  Retour à la liste des articles
+        h1= article.title + ' '
+            span.categorie
+                i.fa.fa-tag
+                |  #{article.category.title}
+        h3
+            | Publié le #{new Date(article.dateCreated).toLocaleString()}, par 
+            em= article.author.name
+        
+        p= article.content
+
+        hr
+
+        //- h3
+        //-     | Publié le #{new Date(article.dateCreated).toLocaleString()}, par 
+        //-     em= commentary.author.name
+
+        each commentary in commentaries
+            +commentary(commentary._id, commentary.content, commentary.dateCreated, commentary.author.name)
+
+        br
+        
+        a(href= '/' + article._id + "/writeCommentary").btn
+            i.fa.fa-plus
+            |  Publier un nouveau commentaire
+
+
+
